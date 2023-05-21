@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
@@ -26,7 +26,7 @@ const Home = () => {
     }
   };
 
-  const delProduct = useCallback(async (id) => {
+  const delProduct = async (id) => {
     const res = await axios.delete(
       `http://localhost:4000/product/delete/${id}`,
       {
@@ -40,12 +40,12 @@ const Home = () => {
       console.log("error");
     } else {
       console.log("product delete");
-      getProducts();
     }
-  }, []);
+  };
 
   useEffect(() => {
     getProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [delProduct]);
 
   return (
@@ -59,13 +59,10 @@ const Home = () => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <button className="btn btn-success " onClick={getProducts}>Search</button>
         <div className="text-end">
-          <button className="btn btn-primary">
-            <NavLink to="/product" className="text-decoration-none text-white">
-              ADD PRODUCT
-            </NavLink>
-          </button>
+          <NavLink to="/product" className="text-decoration-none text-white">
+            <button className="btn btn-primary">ADD PRODUCT</button>
+          </NavLink>
         </div>
         <Table striped bordered hover variant="dark" className="mt-4">
           <thead>
@@ -86,7 +83,7 @@ const Home = () => {
               ? data.map((el, i) => {
                   count++;
                   return (
-                    <tr className="text-center" key={el.id}>
+                    <tr className="text-center" key={el._id}>
                       <td>{count}</td>
                       <td>{el.id}</td>
                       <td>
