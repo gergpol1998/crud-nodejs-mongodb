@@ -8,7 +8,6 @@ const EditProduct = () => {
   const { id } = useParams();
   const history = useNavigate();
   const [update, setUpdate] = useState({
-    id: "",
     name: "",
     price: 0,
     qty: 0,
@@ -41,7 +40,6 @@ const EditProduct = () => {
     e.preventDefault();
 
     let formdata = new FormData();
-    formdata.append("id", update.id);
     formdata.append("img", file);
     formdata.append("name", update.name);
     formdata.append("price", update.price);
@@ -77,8 +75,7 @@ const EditProduct = () => {
               placeholder="Enter ID"
               name="id"
               value={update.id}
-              onChange={handleChange}
-              required
+              readOnly
             />
             <Form.Label>NAME</Form.Label>
             <Form.Control

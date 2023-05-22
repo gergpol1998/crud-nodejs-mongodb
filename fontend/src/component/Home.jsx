@@ -80,7 +80,7 @@ const Home = () => {
           </thead>
           <tbody>
             {data.length > 0
-              ? data.map((el, i) => {
+              ? data.map((el) => {
                   count++;
                   return (
                     <tr className="text-center" key={el._id}>
